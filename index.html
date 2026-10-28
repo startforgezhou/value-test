@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>商业价值测评</title>
+<style>
+:root{--bg:#f6f4ef;--fg:#1f2430;--mut:#6b7280;--card:#fff;--ac:#b8860b;--ac2:#1f3a5f;--bd:#e3ded2;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14171d;--fg:#eceae4;--mut:#9aa1ad;--card:#1e222b;--ac:#e0b44c;--ac2:#8fb3e6;--bd:#2d3340;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#14171d;--fg:#eceae4;--mut:#9aa1ad;--card:#1e222b;--ac:#e0b44c;--ac2:#8fb3e6;--bd:#2d3340;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.7 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:640px;margin:0 auto;padding:20px 16px 40px}
+h1{font-size:28px;margin:24px 0 8px;line-height:1.3}h2{font-size:20px;margin:0 0 8px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:18px;margin:14px 0}
+.mut{color:var(--mut);font-size:14px}
+button{font:inherit;cursor:pointer;border-radius:12px;border:1px solid var(--bd);background:var(--card);color:var(--fg);padding:13px 16px;width:100%;text-align:left;margin:8px 0}
+button:hover{border-color:var(--ac)}
+.pri{background:var(--ac2);color:var(--bg);border:0;text-align:center;font-weight:600}
+.bar{height:6px;background:var(--bd);border-radius:3px;overflow:hidden}.bar i{display:block;height:100%;background:var(--ac);transition:width .3s}
+.tag{display:inline-block;font-size:13px;color:var(--ac);border:1px solid var(--ac);border-radius:20px;padding:0 10px}
+.big{font-size:56px;font-weight:700;color:var(--ac);line-height:1.1}
+.row{display:flex;justify-content:space-between;font-weight:600}
+.back{width:auto;display:inline-block;padding:6px 12px;font-size:14px;color:var(--mut)}
+</style></head><body><main id="app"></main>
+<script>
+var D=[
+{n:"专业能力",q:["我在自己的领域里有一项能拿得出手的核心技能。","同行或同事遇到难题时，会来找我请教。","我能清楚说出自己比别人强在哪里。","我做出过可以量化展示的成果或作品。","我有行业认可的证书、履历或作品作为背书。","即使换一家公司，我的技能依然有市场需求。"],
+r:["你的核心技能还不够突出，市场很难一眼看出你的价值。建议先选定一个主攻方向，用三个月做出一个可展示的作品或案例，再谈包装与议价。","你有扎实的基础，但辨识度不足。能做的人很多，你的价值就容易被压价。试着把经验沉淀成方法、案例或作品集，让别人能快速看到证据。","你的专业能力已经形成壁垒，这是议价能力的根基。下一步是把能力产品化，比如带教、咨询、输出内容，让专业能力不只换工资，也能换更多渠道的收益。"]},
+{n:"资源人脉",q:["我有几位愿意在关键时刻帮我一把的行业朋友。","我认识不同圈层的人，而不只是同一类人。","我会主动维护关系，而不是有事才联系。","有机会出现时，别人会想到推荐我。","我在网络上或圈子里有一定的个人影响力。","我愿意先帮助别人，而不急于得到回报。"],
+r:["你的关系网偏窄，机会多半要靠自己硬找。建议每月主动联系两位行业内的人，从请教和分享做起，慢慢积累信任而非功利交换。","你有一定的人脉基础，但还没有转化为机会。多让别人知道你擅长什么，比如在圈子里分享观点、主动参与项目，让你被想起的概率变高。","你的人脉和口碑已经形成网络效应，机会会自己找上门。注意质量大于数量，把时间投入到少数高价值关系上，并保持互惠。"]},
+{n:"商业思维",q:["我清楚自己的时间大概值多少钱。","我能看出一件事背后的需求、成本和收益。","我尝试过在工资之外获得收入。","我敢于谈价格，不会轻易压低自己。","我会把自己的能力包装成别人愿意买单的价值。","我关注行业趋势，知道哪些方向正在变热。"],
+r:["你可能更习惯做事，而不是衡量事情的价值。先练习算账：每做一件事，问自己为谁创造了什么价值、值多少钱。再从一个小副业或小项目开始试水。","你有一定的商业意识，但还停留在想法层面。选一个最小可行的变现尝试，比如接一单、卖一次服务，用真实反馈检验自己的判断。","你已经具备把能力变成收益的思维，懂价值也敢定价。继续保持对趋势的敏感，并注意风险控制，不要把所有筹码压在单一收入来源上。"]},
+{n:"执行抗压",q:["定下的计划，我大多数能按时完成。","被拒绝或失败后，我能较快调整继续行动。","面对不确定的任务，我会先行动再完善。","我能同时推进多件事而不乱。","在压力下，我依然能保持稳定产出。","答应别人的事，我几乎都会兑现。"],
+r:["你的想法可能多于落地，或者容易被挫折打断。建议把目标拆成每天能完成的小步骤，并让一位朋友监督，先把完成率提上来。","你的执行力不错，但在高压或失败后会有波动。建立固定的复盘与恢复节奏，让状态不依赖情绪，稳定输出比爆发更值钱。","你兑现承诺、扛压力的能力很强，这是别人愿意长期合作的关键。注意别过度承担，学会分配优先级和适当授权。"]},
+{n:"学习成长",q:["我每个月都会系统学习新东西。","我会定期复盘，总结经验教训。","我乐于接受批评并据此改进。","我会主动学习专业之外的知识，如沟通、财务、AI 工具。","我有明确的一到三年成长目标。","我会向比自己强的人学习，而不回避差距。"],
+r:["你的成长可能靠经验自然积累，缺少主动设计。先定一个一年目标，每周固定两小时学习，并把所学立刻用到工作里。","你有学习习惯，但系统性与目标感可以更强。把零散学习串成路线，并定期检验它是否让你的收入或能力真正提升。","你的成长速度很快，长期来看会不断抬高自己的价值上限。保持跨界学习，并把所学教给别人，这会进一步巩固你的影响力。"]}
+];
+var L=[
+[0,"待开发的潜力股","你目前的商业价值还没有被充分激活，但这并不代表能力不足，更多是方向、展示和行动还没跟上。优先补最短的那块板，一两个具体的小行动就能带来明显改变。"],
+[70,"成长中的实力派","你已经具备不错的基础，在部分维度有明显亮点。现在的关键是集中火力：选一个能放大优势的方向，把它做成可被看见、可被定价的成果。"],
+[95,"市场认可的中坚力量","你的综合能力强，多数场景下都能创造稳定价值。下一步是打造个人品牌与多元收入，把可替代性降到最低，从好用的人变成必选的人。"],
+[120,"高议价能力的稀缺型人才","你在多个维度表现突出，具备很强的议价和选择权。接下来要考虑杠杆：团队、产品、资本或影响力，让你的价值不再受限于个人时间。"]];
+var O=["完全不符合","不太符合","一般","比较符合","非常符合"];
+var Q=[],i=0,a=[],app=document.getElementById("app");
+for(var j=0;j<6;j++)for(var k=0;k<5;k++)Q.push([k,D[k].q[j]]);
+function start(){i=0;a=[];ask()}
+function home(){app.innerHTML='<h1>你的商业价值有多高？</h1><p class="mut">30 道题，约 5 分钟。从专业能力、资源人脉、商业思维、执行抗压、学习成长五个维度，评估你当下的市场价值，并给出针对性的详细解析。</p><div class="card"><b>怎么答</b><p class="mut" style="margin:6px 0 0">凭第一反应，选最贴近你真实情况的选项，而不是你希望的样子。结果仅供自我参考，不构成职业或投资建议。</p></div><button class="pri" onclick="start()">开始测评</button>'}
+function ask(){var q=Q[i],h='<div class="row mut"><span>第 '+(i+1)+' / 30 题</span><span>'+D[q[0]].n+'</span></div><div class="bar"><i style="width:'+(i/30*100)+'%"></i></div><div class="card"><h2>'+q[1]+'</h2></div>';
+O.forEach(function(t,s){h+='<button onclick="pick('+(s+1)+')">'+t+'</button>'});
+if(i>0)h+='<button class="back" onclick="i--;ask()">← 上一题</button>';app.innerHTML=h;window.scrollTo(0,0)}
+function pick(s){a[i]=s;i++;i<30?ask():res()}
+function res(){var S=[0,0,0,0,0],T=0;Q.forEach(function(q,n){S[q[0]]+=a[n];T+=a[n]});
+var lv=L[0];L.forEach(function(l){if(T>=l[0])lv=l});
+var cx=150,cy=140,R=95,pts="",grid="",lab="";
+for(var k=0;k<5;k++){var g=-Math.PI/2+k*2*Math.PI/5,p=(S[k]-6)/24*0.9+0.1;
+pts+=(cx+R*p*Math.cos(g)).toFixed(1)+","+(cy+R*p*Math.sin(g)).toFixed(1)+" ";
+grid+='<line x1="'+cx+'" y1="'+cy+'" x2="'+(cx+R*Math.cos(g)).toFixed(1)+'" y2="'+(cy+R*Math.sin(g)).toFixed(1)+'" stroke="var(--bd)"/>';
+lab+='<text x="'+(cx+(R+26)*Math.cos(g)).toFixed(1)+'" y="'+(cy+(R+22)*Math.sin(g)+5).toFixed(1)+'" text-anchor="middle" font-size="13" fill="var(--fg)">'+D[k].n+'</text>'}
+var rings="";[.33,.66,1].forEach(function(f){var q="";for(var k=0;k<5;k++){var g=-Math.PI/2+k*2*Math.PI/5;q+=(cx+R*f*Math.cos(g)).toFixed(1)+","+(cy+R*f*Math.sin(g)).toFixed(1)+" "}rings+='<polygon points="'+q+'" fill="none" stroke="var(--bd)"/>'});
+var h='<p class="mut">你的商业价值指数</p><div class="big">'+T+'<span class="mut" style="font-size:18px"> / 150</span></div><p><span class="tag">'+lv[1]+'</span></p><p>'+lv[2]+'</p>';
+h+='<div class="card"><svg viewBox="0 0 300 290" width="100%" role="img" aria-label="五维雷达图">'+rings+grid+'<polygon points="'+pts+'" fill="var(--ac)" fill-opacity=".3" stroke="var(--ac)" stroke-width="2"/>'+lab+'</svg></div><h2 style="margin-top:22px">五维详细解析</h2>';
+var o=[0,1,2,3,4].sort(function(x,y){return S[y]-S[x]});
+D.forEach(function(d,k){var t=S[k]<=14?0:S[k]<=22?1:2;
+h+='<div class="card"><div class="row"><span>'+d.n+'</span><span style="color:var(--ac)">'+S[k]+' / 30 · '+["待提升","良好","优势"][t]+'</span></div><div class="bar" style="margin:8px 0"><i style="width:'+((S[k]-6)/24*100)+'%"></i></div><div>'+d.r[t]+'</div></div>'});
+h+='<div class="card"><h2>综合建议</h2><p>你的最强项是<b>'+D[o[0]].n+'</b>，建议把它作为个人定位的核心，对外重点展示；最需要补强的是<b>'+D[o[4]].n+'</b>，它是目前限制整体价值的短板，未来 30 天可以只围绕它设定一个小目标并坚持完成。</p><p class="mut" style="margin-bottom:0">商业价值不是固定标签，而是可以被设计和放大的。建议三个月后再测一次，对照变化。</p></div>';
+h+='<button class="pri" onclick="start()">重新测评</button>';app.innerHTML=h;window.scrollTo(0,0)}
+home();
+</script></body></html>
